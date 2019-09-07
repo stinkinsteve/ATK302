@@ -33,7 +33,6 @@ function setup() {
   ellipse(208, 206, 22, 42);
 //Aldricks head
   fill('#660033');
-  triangle(92,93,243,177,125,153);
   triangle(304,92,238,178,271,109);
   triangle(181,183,232,181,208,202);
   arc(201, 102, 180, 180, TWO_PI, PI);
@@ -45,6 +44,10 @@ function setup() {
   ellipse(235, 374, 12, 32);
   ellipse(247, 374, 12, 32);
   ellipse(259, 374, 12, 32);
+
+
+  text('Aldrich - The vigilant dark defender of the night. whose powers of observation', 30,450);
+  text(' detects vermin and pestilence and brings them to an immediate end.', 30, 465);
 
   if (mouseIsPressed) {
     fill('#ff4d88')
