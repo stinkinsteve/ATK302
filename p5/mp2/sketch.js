@@ -9,7 +9,7 @@ function setup() {
   img3 = loadImage("assets/goldwaves.jpg");
   img4 = loadImage("assets/mainbk.jpg");
   img5 = loadImage("assets/oceanwaves.jpg");
-  createCanvas(800,800);
+  createCanvas(1920,1080);
   imageMode(CENTER);
 }
 
