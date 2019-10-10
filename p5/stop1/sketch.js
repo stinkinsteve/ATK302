@@ -30,7 +30,7 @@ switch(myState) {
 
   case 1:
   fill('gray');
-  ellipse(width/2, height/2, 100, 100) ; //middle
+  ellipse(width/2, height/2, 100car, 100) ; //middle
   fill('gray');
   ellipse(width/2, height/2 - 125, 100, 100) ; //top
   fill('green') ;
