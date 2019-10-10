@@ -36,7 +36,6 @@ function Car() {
   this.display = function() {
     fill(this.r, this.g, this.b);
     rect(this.pos.x, this.pos.y, 100, 50);
-
   }
   this.drive = function() {
     this.pos.add(this.vel);
@@ -45,9 +44,7 @@ function Car() {
     if (this.pos.y > height) this.pos.y = 0;
     if (this.pos.y < 0) this.pos.y = height;
   }
-
 }
-
 function checkKeys() {
   if (keyIsDown(LEFT_ARROW)) frogPos.x = frogPos.x - 5;
   if (keyIsDown(RIGHT_ARROW)) frogPos.x = frogPos.x + 5;
