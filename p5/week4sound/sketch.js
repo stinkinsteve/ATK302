@@ -1,7 +1,7 @@
 var song = 0;
 
 function preload() {
-    song = loadSound('assets/duneSea.mp3');
+    song = loadSound('http://127.0.0.1:3000/p5/week4sound/assets/duneSea.mp3');
 }
 
 function setup() {
