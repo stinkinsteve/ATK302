@@ -7,12 +7,14 @@ var score1 = 0 ;
 var begin1 = 0;
 var mummy = 0;
 var shriek = 0;
+var mummyPic = 0;
 
 function setup() {
 //load fonts, images, sounds
   createCanvas(600, 600);
   orbitron = loadFont("asset/orbitron-black.otf");
   efloor = loadImage("asset/efloor.jpg");
+  mummyPic = loadImage("asset/mummy.gif");
 
 function preload() {
   begin1 = loadSound('asset/start.wav');
@@ -27,7 +29,7 @@ function preload() {
     cat = catLeft;
   }
   //initial frog position
-  frogPos = createVector(width/2, height-80) ;
+  frogPos = createVector(width/2, height/2) ;
   rectMode(CENTER) ;
   ellipseMode(CENTER) ;
   //imageMode(CEnter);
@@ -113,10 +115,11 @@ function Car() {
 
   // methods
   this.display = function() {
-    fill(this.r, this.g, this.b);
-    rect(this.pos.x, this.pos.y, 100, 50);
-    ellipse(this.pos.x - 40, this.pos.y + 30, 25, 25);
-    ellipse(this.pos.x + 40, this.pos.y + 30, 25, 25);
+    image(mummyPic, this.pos.x, this.pos.y, 50, 50);
+//    fill(this.r, this.g, this.b);
+//    rect(this.pos.x, this.pos.y, 100, 50);
+//    ellipse(this.pos.x - 40, this.pos.y + 30, 25, 25);
+//    ellipse(this.pos.x + 40, this.pos.y + 30, 25, 25);
   }
 
   this.drive = function() {
