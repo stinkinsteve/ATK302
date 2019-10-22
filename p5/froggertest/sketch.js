@@ -4,9 +4,9 @@ var myState = 0 ;
 var timer ;
 var cat, catRight, catLeft;
 var score1 = 0 ;
-var beginning = 0;
+var begin1 = 0;
 var mummy = 0;
-var shreik = 0;
+var shriek = 0;
 
 function setup() {
 //load fonts, images, sounds
@@ -15,12 +15,12 @@ function setup() {
   efloor = loadImage("asset/efloor.jpg");
 
 function preload() {
-  beginning = loadSound('asset/start.wav');
+  begin1 = loadSound('asset/start.wav');
   mummy = loadSound('asset/stop.wav');
   shriek = loadSound('asset/cat.wav');
 }
   //spawn the cars
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < 40; i++) {
     cars.push(new Car());
     catLeft = loadImage("asset/catleft.gif");
     catRight = loadImage("asset/catright.gif");
@@ -93,7 +93,7 @@ function mouseReleased(){
 
 function resetTheGame(){
   car = [] ; //clear the array
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < 40; i++) {
     cars.push(new Car());
   }
    timer = 0;
@@ -155,7 +155,7 @@ function game() {
     //test if car is close to frog
     if (cars[i].pos.dist(frogPos) < 50) {
       cars.splice(i, 1) ;
-      mummy.play();
+//      mummy.play();
       score1 = score1 + 1 ;
     }
   }
