@@ -11,16 +11,16 @@ var mummyPic = 0;
 
 function setup() {
 //load fonts, images, sounds
-  createCanvas(600, 600);
+  createCanvas(800, 800);
   orbitron = loadFont("asset/orbitron-black.otf");
   efloor = loadImage("asset/efloor.jpg");
   mummyPic = loadImage("asset/mummy.gif");
 
-function preload() {
-  begin1 = loadSound('asset/start.wav');
-  mummy = loadSound('asset/stop.wav');
+//function preload()
+  begin1 = loadSound('asset/thunderstruck.mid');
+  mummy = loadSound('asset/stop.mp3');
   shriek = loadSound('asset/cat.wav');
-}
+//}
   //spawn the cars
   for (var i = 0; i < 40; i++) {
     cars.push(new Car());
@@ -32,19 +32,21 @@ function preload() {
   frogPos = createVector(width/2, height/2) ;
   rectMode(CENTER) ;
   ellipseMode(CENTER) ;
-  //imageMode(CEnter);
+  imageMode(CENTER);
 }
 
 function draw() {
 
-    textFont(orbitron,24) ;
+    textFont(orbitron,36) ;
 
     switch(myState) {
+
      case 0:
-     image(efloor, 0, 0, 800, 800);
-     fill('red');
+     image(efloor, width/2, height/2);
+     fill('#ed9679');
      text("Welcome human", 150, 200);
      text("Click if you dare ...", 150, 250);
+//     begin1.play();
      break;
 
      case 1:
@@ -57,13 +59,15 @@ function draw() {
      break;
 
      case 2:
-     image(efloor, 0, 0);
+     image(efloor, width/2, height/2);
+     fill('#ed9679');
      text("You Loose", width/2 - 40, height/2);
      text("Your score = " + score1, width/2 - 80, height/2 + 25);
      break;
 
      case 3:
-     image(efloor, 0, 0);
+     image(efloor, width/2, height/2);
+     fill('#ed9679');
      text("You Win", width/2 - 40, height/2);
      text("Your score = " + score1, width/2 - 80, height/2 + 25);
      break;
@@ -148,9 +152,10 @@ function checkForKeys() {
 }
 
 function game() {
-  background(134);
-  image(efloor, width, height, 200, 200);
-  text("Score = " + score1, width/2 - 10, 20) ;
+
+  image(efloor, width/2, height/2);
+  fill('#ed9679');
+  text("Score = " + score1, width/2 - 10, height - 100) ;
   //iterate
   for (var i = 0; i < cars.length; i++) {
     cars[i].display();
@@ -158,7 +163,8 @@ function game() {
     //test if car is close to frog
     if (cars[i].pos.dist(frogPos) < 50) {
       cars.splice(i, 1) ;
-//      mummy.play();
+      shriek.play();
+      mummy.play();
       score1 = score1 + 1 ;
     }
   }
