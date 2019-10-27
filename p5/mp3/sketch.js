@@ -18,7 +18,7 @@ function setup() {
   splash = loadImage("asset/efloor1a.jpg");
   youWin = loadImage("asset/youwin.jpg");
   youLose = loadImage("asset/youlose.jpg");
-  mummyPic = loadImage("asset/mummy.gif");
+  mummyPic = loadImage("asset/mummyb.gif");
 
   //function preload()
   //  begin1 = loadSound('asset/thunderstruck.mid');
@@ -66,7 +66,8 @@ function draw() {
     case 2:
       image(youLose, width / 2, height / 2);
       fill(0);
-      rect(520, 682, 260,40);
+      text("Click to play again", 100, 650);
+      rect(540, 682, 300,40);
       fill('#f75948');
       textSize(47);
       text("Score = " + score1, width / 2 - 10, height - 100);
@@ -75,9 +76,10 @@ function draw() {
     case 3:
       image(youWin, width / 2, height / 2);
       fill(0);
-      rect(520, 682, 260,40);
+      rect(540, 682, 300,40);
       fill('#f75948');
       textSize(47);
+      text("Click to play again", 100, 650);
       text("Score = " + score1, width / 2 - 10, height - 100);
       break;
   }
@@ -128,10 +130,6 @@ function Car() {
   // methods
   this.display = function() {
     image(mummyPic, this.pos.x, this.pos.y, 50, 50);
-    //    fill(this.r, this.g, this.b);
-    //    rect(this.pos.x, this.pos.y, 100, 50);
-    //    ellipse(this.pos.x - 40, this.pos.y + 30, 25, 25);
-    //    ellipse(this.pos.x + 40, this.pos.y + 30, 25, 25);
   }
 
   this.drive = function() {
@@ -174,7 +172,7 @@ function game() {
       cars.splice(i, 1);
       //      shriek.play();
       mummy.play();
-      score1 = score1 + 1;
+      score1 = score1 + 10;
     }
   }
 
@@ -183,13 +181,12 @@ function game() {
     myState = 3; // they won
   }
 
-  // draw the frog
-  //  fill('green') ;
+  // draw the cat
   image(cat, frogPos.x, frogPos.y, 60, 60);
   checkForKeys();
 
   timer1++ ;
-  text("timer = " + timer1, width / 4 - 75, height - 100);
+  text("timer = " + timer1, 100, height - 100);
   if (timer1 >= 500) {
     timer1 = 0;
     myState = 2;
