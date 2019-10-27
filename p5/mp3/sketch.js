@@ -2,13 +2,14 @@ var cars = [];
 var frogPos;
 var myState = 0;
 var timer = 0;
-var timer1 = 0;
+var timer1 = 500, timer2 = 0;
 var cat, catRight, catLeft;
 var score1 = 0;
 var begin1 = 0;
 var mummy = 0;
 var shriek = 0;
 var mummyPic = 0;
+var i = 0;
 
 function setup() {
   //load fonts, images, sounds
@@ -54,7 +55,7 @@ function draw() {
       image(splash, width / 2, height / 2);
       fill('black');
       text("Welcome, human", 150, 600);
-      text("Click if you dare ...", 150, 650);
+      flashClick();
             //     begin1.play();
       break;
 
@@ -79,7 +80,6 @@ function draw() {
       rect(540, 682, 300,40);
       fill('#f75948');
       textSize(47);
-      text("Click to play again", 100, 650);
       text("Score = " + score1, width / 2 - 10, height - 100);
       break;
   }
@@ -106,13 +106,13 @@ function mouseReleased() {
 }
 
 function resetTheGame() {
-  car = []; //clear the array
+  cars.length = 0;  //clear the array
   for (var i = 0; i < 4; i++) {
     cars.push(new Car());
   }
   frogPos = createVector(width / 2, height / 2);
   timer = 0;
-  timer1 = 0;
+  timer1 = 500;
   score1 = 0;
 }
 
@@ -147,14 +147,29 @@ function Car() {
 function keyPressed() {
   if (keyCode == LEFT_ARROW) cat = catLeft;
   if (keyCode == RIGHT_ARROW) cat = catRight;
+  if (keyCode == ENTER) {
+    resetTheGame();
+     myState = 0;
+   }
 }
 
 function checkForKeys() {
-  if (keyIsDown(LEFT_ARROW)) frogPos.x = frogPos.x - 5;
-  if (keyIsDown(RIGHT_ARROW)) frogPos.x = frogPos.x + 5;
-  if (keyIsDown(UP_ARROW)) frogPos.y = frogPos.y - 5;
-  if (keyIsDown(DOWN_ARROW)) frogPos.y = frogPos.y + 5;
-
+  if (keyIsDown(LEFT_ARROW)) {
+    frogPos.x = frogPos.x - 5;
+    if (frogPos.x <= 0) frogPos.x = width ;
+  }
+  if (keyIsDown(RIGHT_ARROW)) {
+    frogPos.x = frogPos.x + 5;
+    if (frogPos.x >= width) frogPos.x = 0 ;
+  }
+  if (keyIsDown(UP_ARROW)) {
+    frogPos.y = frogPos.y - 5;
+    if (frogPos.y <= 0) frogPos.y = height ;
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    frogPos.y = frogPos.y + 5;
+    if (frogPos.y >= height) frogPos.y = 0 ;
+  }
 }
 
 function game() {
@@ -185,11 +200,22 @@ function game() {
   image(cat, frogPos.x, frogPos.y, 60, 60);
   checkForKeys();
 
-  timer1++ ;
+  timer1-- ;
   text("timer = " + timer1, 100, height - 100);
-  if (timer1 >= 500) {
-    timer1 = 0;
+  if (timer1 <= 0) {
+    timer1 = 500;
     myState = 2;
   }
 
 }
+  function flashClick () {
+    timer2++;
+    fill('black');
+    text("Click if you dare ...", 150, 650);
+    fill('#f75948');
+    text("Click if you dare ...", 150, 650);
+    text("timer = " + timer2, 100, height - 100);
+    if (timer2 >=500) {
+      myState = 1;
+    }
+  }
