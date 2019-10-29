@@ -2,7 +2,8 @@ var cars = [];
 var frogPos;
 var myState = 0;
 var timer = 0;
-var timer1 = 500, timer2 = 0;
+var timer1 = 500;
+var timer2 = 0;
 var cat, catRight, catLeft;
 var score1 = 0;
 var begin1 = 0;
@@ -10,6 +11,12 @@ var mummy = 0;
 var shriek = 0;
 var mummyPic = 0;
 var i = 0;
+
+function preload() {
+  begin1 = loadSound('asset/snip.mp3');
+  mummy = loadSound('asset/cry2.mp3');
+  shriek = loadSound('asset/cat.wav');
+}
 
 function setup() {
   //load fonts, images, sounds
@@ -21,11 +28,6 @@ function setup() {
   youLose = loadImage("asset/youlose.jpg");
   mummyPic = loadImage("asset/mummyb.gif");
 
-  //function preload()
-  //  begin1 = loadSound('asset/thunderstruck.mid');
-  mummy = loadSound('asset/cry2.mp3');
-  shriek = loadSound('asset/cat.wav');
-  //}
   //spawn the cars
   for (var i = 0; i < 4; i++) {
     cars.push(new Car());
@@ -38,6 +40,8 @@ function setup() {
   rectMode(CENTER);
   ellipseMode(CENTER);
   imageMode(CENTER);
+  begin1.play();
+  begin1.loop();
 
 }
 
@@ -55,12 +59,25 @@ function draw() {
       image(splash, width / 2, height / 2);
       fill('black');
       text("Welcome, human", 150, 600);
-      flashClick();
-            //     begin1.play();
+      fill('black');
+      text("Click if you dare ...", 150, 650);
+//      fill('#f75948');
+//      text("Click if you dare ...", 150, 650);
+//      text("timer = " + timer2, 100, height - 100);
+//      timer2++;
+//      if (timer2 <= 500) {
+//        timer2 = 0;
+//        myState = 1;
+//      }
+//      if (begin1.isPlaying()) {
+//        begin1.stop();
+//      }
+//      else {
+//        begin1.play();
+//      }
       break;
 
     case 1:
-
       game();
       break;
 
@@ -68,19 +85,25 @@ function draw() {
       image(youLose, width / 2, height / 2);
       fill(0);
       text("Click to play again", 100, 650);
-      rect(540, 682, 300,40);
+      rect(540, 682, 300, 40);
       fill('#f75948');
       textSize(47);
       text("Score = " + score1, width / 2 - 10, height - 100);
+//      if (begin1.isPlaying()) { // .isPlaying() returns a boolean
+//        begin1.stop();
+//      }
       break;
 
     case 3:
       image(youWin, width / 2, height / 2);
       fill(0);
-      rect(540, 682, 300,40);
+      rect(540, 682, 300, 40);
       fill('#f75948');
       textSize(47);
       text("Score = " + score1, width / 2 - 10, height - 100);
+//      if (begin1.isPlaying()) { // .isPlaying() returns a boolean
+//      begin1.stop();
+//      }
       break;
   }
 
@@ -106,7 +129,7 @@ function mouseReleased() {
 }
 
 function resetTheGame() {
-  cars.length = 0;  //clear the array
+  cars.length = 0; //clear the array
   for (var i = 0; i < 4; i++) {
     cars.push(new Car());
   }
@@ -149,26 +172,26 @@ function keyPressed() {
   if (keyCode == RIGHT_ARROW) cat = catRight;
   if (keyCode == ENTER) {
     resetTheGame();
-     myState = 0;
-   }
+    myState = 0;
+  }
 }
 
 function checkForKeys() {
   if (keyIsDown(LEFT_ARROW)) {
     frogPos.x = frogPos.x - 5;
-    if (frogPos.x <= 0) frogPos.x = width ;
+    if (frogPos.x <= 0) frogPos.x = width;
   }
   if (keyIsDown(RIGHT_ARROW)) {
     frogPos.x = frogPos.x + 5;
-    if (frogPos.x >= width) frogPos.x = 0 ;
+    if (frogPos.x >= width) frogPos.x = 0;
   }
   if (keyIsDown(UP_ARROW)) {
     frogPos.y = frogPos.y - 5;
-    if (frogPos.y <= 0) frogPos.y = height ;
+    if (frogPos.y <= 0) frogPos.y = height;
   }
   if (keyIsDown(DOWN_ARROW)) {
     frogPos.y = frogPos.y + 5;
-    if (frogPos.y >= height) frogPos.y = 0 ;
+    if (frogPos.y >= height) frogPos.y = 0;
   }
 }
 
@@ -200,7 +223,7 @@ function game() {
   image(cat, frogPos.x, frogPos.y, 60, 60);
   checkForKeys();
 
-  timer1-- ;
+  timer1--;
   text("timer = " + timer1, 100, height - 100);
   if (timer1 <= 0) {
     timer1 = 500;
@@ -208,14 +231,16 @@ function game() {
   }
 
 }
-  function flashClick () {
-    timer2++;
-    fill('black');
-    text("Click if you dare ...", 150, 650);
-    fill('#f75948');
-    text("Click if you dare ...", 150, 650);
-    text("timer = " + timer2, 100, height - 100);
-    if (timer2 >=500) {
-      myState = 1;
-    }
+
+function flashClick() {
+  fill('black');
+  text("Click if you dare ...", 150, 650);
+  fill('#f75948');
+  text("Click if you dare ...", 150, 650);
+  text("timer = " + timer2, 100, height - 100);
+  timer2++;
+  if (timer2 <= 500) {
+    timer2 = 0;
+    myState = 1;
   }
+}
