@@ -3,7 +3,7 @@ var namesArray = [];
 function setup() {
 
   // Tabletop stuff, for getting google spreadsheet data in.
-  let url = '1GtE3eoYVWBv9zMPoyettXzDCEv6qdNGKio_hgEh5duM'; // this is KEY of the URL from the sheet
+  let url = '16d4phqOwFqj98VeRVvrojLYjTwGAtMKTy0DmUu2Uecg'; // this is KEY of the URL from the sheet
   let settings = {
     key: url, // The url of the published google sheet
     callback: gotData, // A callback for when the data comes in
@@ -41,7 +41,7 @@ function draw() {
 
   // // iterate through the namesArray and display the objects!
   for (let i = 0 ; i < namesArray.length ; i++) {
-    namesArray[i].display ;
+    namesArray[i].display() ;
   }
 
 }
@@ -50,17 +50,28 @@ function draw() {
 // my circle class
 function Circle(myName, myShape) {
   this.pos = createVector(random(width), random(height));
+  this.vel = createVector(random(-5, 5), random(-5, 5));
   this.name = myName;
   this.shape = myShape;
 
-
-  this.display - function() {
+  this.display = function() {
   if (this.shape == "Circle") {
   ellipse(this.pos.x, this.pos.y, 100, 100);
   }
   else {
   rect(this.pos.x, this.pos.y, 100, 100) ;
   }
-  text(this.name,this.pos.y, 100, 100);
+  text(this.name, this.pos.x, this.pos.y, 100, 100);
+//  text(this.shape, this.pos.x + 10, this.pos.y, 100, 100);
+
+  }
+  this.drive = function() {
+    this.pos.add(this.vel);
+
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
+
   }
 }
