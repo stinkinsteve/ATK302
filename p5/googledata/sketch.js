@@ -30,7 +30,7 @@ function gotData(data) {
 
   // iterate through the array of data and create an object and push it on an array called namesArray
   for (let i = 0; i < data.length; i++) {
-    namesArray.push(new Circle(data[i].Name, data[i].Shape));
+    namesArray.push(new Circle(data[i].Name, data[i].Song));
   }
 
 }
@@ -49,22 +49,26 @@ function draw() {
 
 
 // my circle class
-function Circle(myName, myShape) {
+function Circle(myName, mySong) {
   this.pos = createVector(random(width), random(height));
   this.vel = createVector(random(-5, 5), random(-5, 5));
+  this.color = random(0,255);
   this.name = myName;
-  this.shape = myShape;
+  this.song = mySong;
+
 
   this.display = function() {
-    if (this.shape == "Circle") {
+    if (this.song == "Hotel California") {
+      fill(this.color);
       ellipse(this.pos.x, this.pos.y, 100, 100);
     } else {
+      fill(this.color);
       rect(this.pos.x, this.pos.y, 100, 100);
     }
     fill('black');
     text(this.name, this.pos.x, this.pos.y, 100, 100);
     fill('orange');
-    text(this.shape, this.pos.x + 10, this.pos.y, 100, 100);
+    text(this.song, this.pos.x + 10, this.pos.y, 100, 100);
 
   }
   this.drive = function() {
