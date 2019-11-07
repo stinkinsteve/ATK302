@@ -30,18 +30,19 @@ function gotData(data) {
 
   // iterate through the array of data and create an object and push it on an array called namesArray
   for (let i = 0; i < data.length; i++) {
-    namesArray.push(new Circle(data[i].Name, data[i].Shape)) ;
-   }
+    namesArray.push(new Circle(data[i].Name, data[i].Shape));
+  }
 
 }
 
 
 function draw() {
   background('blue');
+  game();
 
   // // iterate through the namesArray and display the objects!
-  for (let i = 0 ; i < namesArray.length ; i++) {
-    namesArray[i].display() ;
+  for (let i = 0; i < namesArray.length; i++) {
+    namesArray[i].display();
   }
 
 }
@@ -55,14 +56,15 @@ function Circle(myName, myShape) {
   this.shape = myShape;
 
   this.display = function() {
-  if (this.shape == "Circle") {
-  ellipse(this.pos.x, this.pos.y, 100, 100);
-  }
-  else {
-  rect(this.pos.x, this.pos.y, 100, 100) ;
-  }
-  text(this.name, this.pos.x, this.pos.y, 100, 100);
-//  text(this.shape, this.pos.x + 10, this.pos.y, 100, 100);
+    if (this.shape == "Circle") {
+      ellipse(this.pos.x, this.pos.y, 100, 100);
+    } else {
+      rect(this.pos.x, this.pos.y, 100, 100);
+    }
+    fill('black');
+    text(this.name, this.pos.x, this.pos.y, 100, 100);
+    fill('orange');
+    text(this.shape, this.pos.x + 10, this.pos.y, 100, 100);
 
   }
   this.drive = function() {
@@ -73,5 +75,22 @@ function Circle(myName, myShape) {
     if (this.pos.y > height) this.pos.y = 0;
     if (this.pos.y < 0) this.pos.y = height;
 
+  }
+}
+
+function game() {
+
+  textSize(18);
+      fill('#f75948');
+//  text("Score = " + score1, width / 2 - 10, height - 100);
+  //iterate
+  for (var i = 0; i < namesArray.length; i++) {
+    namesArray[i].display();
+    namesArray[i].drive();
+    //test if car is close to frog
+    //if (namesArray[i].pos.dist(frogPos) < 50) {
+    //  namesArray.splice(i, 1);
+
+  //}
   }
 }
