@@ -29,7 +29,7 @@ function setup() {
   mummyPic = loadImage("asset/mummyb.gif");
 
   //spawn the cars
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 40; i++) {
     cars.push(new Car());
     catLeft = loadImage("asset/catleft.gif");
     catRight = loadImage("asset/catright.gif");
@@ -130,7 +130,7 @@ function mouseReleased() {
 
 function resetTheGame() {
   cars.length = 0; //clear the array
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 40; i++) {
     cars.push(new Car());
   }
   frogPos = createVector(width / 2, height / 2);
