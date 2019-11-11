@@ -1,4 +1,6 @@
 var namesArray = [];
+var myName;
+var songTitle;
 
 function setup() {
 
@@ -15,11 +17,12 @@ function setup() {
 
 
   // Regular setup code we usually have
-  createCanvas(600, 600);
+  createCanvas(windowWidth, windowHeight);
   textAlign(CENTER);
   ellipseMode(CENTER);
   rectMode(CENTER);
-
+  hotel = loadImage("assets/hotel.jpg");
+  frampton = loadImage("assets/frampton.jpg");
 }
 
 // The data comes back as an array of objects
@@ -30,14 +33,14 @@ function gotData(data) {
 
   // iterate through the array of data and create an object and push it on an array called namesArray
   for (let i = 0; i < data.length; i++) {
-    namesArray.push(new Circle(data[i].Name, data[i].Song));
+    namesArray.push(new Circle(data[i].name, data[i].title));
   }
 
 }
 
 
 function draw() {
-  background('blue');
+  background('#417eba');
   game();
 
   // // iterate through the namesArray and display the objects!
@@ -47,54 +50,64 @@ function draw() {
 
 }
 
-
 // my circle class
-function Circle(myName, mySong) {
+function Circle(myName, songTitle) {
   this.pos = createVector(random(width), random(height));
   this.vel = createVector(random(-5, 5), random(-5, 5));
-  this.color = random(0,255);
+  this.r = random(255);
+  this.g = random(255);
+  this.b = random(255);
   this.name = myName;
-  this.song = mySong;
+  this.song = songTitle;
+
 
 
   this.display = function() {
-    if (this.song == "Hotel California") {
-      fill(this.color);
-      ellipse(this.pos.x, this.pos.y, 100, 100);
-    } else {
-      fill(this.color);
-      rect(this.pos.x, this.pos.y, 100, 100);
+
+      if (this.song == "Do You Feel Like I Do") {
+        //    fill(this.r, this.g, this.b);
+        image(frampton, this.pos.x - 50, this.pos.y - 50);
+        textSize(16);
+        fill('yellow');
+        text(this.name, this.pos.x, this.pos.y + 2, 100, 100);
+        textSize(12);
+        fill('orange');
+        text(this.song, this.pos.x, this.pos.y + 20, 100, 100);
+      } else {
+        if (this.song == "hotel california") {
+          //    fill(this.r, this.g, this.b);
+          image(hotel, this.pos.x - 50, this.pos.y - 50);
+        } else {
+          fill(this.r, this.g, this.b);
+          rect(this.pos.x, this.pos.y, 100, 100);
+        }
+        textSize(16);
+        fill('black');
+        text(this.name, this.pos.x, this.pos.y + 2, 100, 100);
+        textSize(12);
+        fill('orange');
+        text(this.song, this.pos.x, this.pos.y + 20, 100, 100);
+      }
+      this.drive = function() {
+        this.pos.add(this.vel);
+
+        if (this.pos.x > width) this.pos.x = 0;
+        if (this.pos.x < 0) this.pos.x = width;
+        if (this.pos.y > height) this.pos.y = 0;
+        if (this.pos.y < 0) this.pos.y = height;
+
+      }
     }
-    fill('black');
-    text(this.name, this.pos.x, this.pos.y, 100, 100);
-    fill('orange');
-    text(this.song, this.pos.x + 10, this.pos.y, 100, 100);
-
   }
-  this.drive = function() {
-    this.pos.add(this.vel);
-
-    if (this.pos.x > width) this.pos.x = 0;
-    if (this.pos.x < 0) this.pos.x = width;
-    if (this.pos.y > height) this.pos.y = 0;
-    if (this.pos.y < 0) this.pos.y = height;
-
-  }
-}
 
 function game() {
 
   textSize(18);
-      fill('#f75948');
-//  text("Score = " + score1, width / 2 - 10, height - 100);
+  fill('#f75948');
   //iterate
   for (var i = 0; i < namesArray.length; i++) {
     namesArray[i].display();
     namesArray[i].drive();
-    //test if car is close to frog
-    //if (namesArray[i].pos.dist(frogPos) < 50) {
-    //  namesArray.splice(i, 1);
 
-  //}
   }
 }
