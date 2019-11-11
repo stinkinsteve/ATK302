@@ -64,7 +64,7 @@ function Circle(myName, songTitle) {
 
   this.display = function() {
 
-      if (this.song == "Do You Feel Like I Do") {
+        if (this.song == "Do You Feel Like I Do") {
         //    fill(this.r, this.g, this.b);
         image(frampton, this.pos.x - 50, this.pos.y - 50);
         textSize(16);
@@ -73,11 +73,13 @@ function Circle(myName, songTitle) {
         textSize(12);
         fill('orange');
         text(this.song, this.pos.x, this.pos.y + 20, 100, 100);
-      } else {
+      }
+      else {
         if (this.song == "hotel california") {
           //    fill(this.r, this.g, this.b);
           image(hotel, this.pos.x - 50, this.pos.y - 50);
-        } else {
+        }
+        else {
           fill(this.r, this.g, this.b);
           rect(this.pos.x, this.pos.y, 100, 100);
         }
