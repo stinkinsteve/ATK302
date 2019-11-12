@@ -21,8 +21,9 @@ function setup() {
   textAlign(CENTER);
   ellipseMode(CENTER);
   rectMode(CENTER);
-  hotel = loadImage("assets/hotel.jpg");
+  hotel = loadImage("assets/cali.jpg");
   frampton = loadImage("assets/frampton.jpg");
+  weekend = loadImage("assets/weekend.jpg");
 }
 
 // The data comes back as an array of objects
